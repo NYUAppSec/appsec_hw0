@@ -3,17 +3,20 @@ A starter assignment to ensure things are set up and working properly with Githu
 
 ## Setup
 
-### SH Key Setup Guide
+### SSH Key Setup Guide
 
 #### Generate an SSH key
-If you already have a public key, you can use that, but if you don't go ahead and create a new one with the following command.
+For a detailed guide, please see [Connecting to GitHub with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh). If you already have a public key, you can use that, but if you don't go ahead and create a new one with the following command. Just be sure that instead of netid@nyu.edu, you use your actual email address.
 ```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "netid@nyu.edu"
 ```
+You can save it in the default location which is usually ~.ssh/id_ed25519
+
+When creating your SSH key, we recommend using a passphrase for added security. Don't worry about having to enter it frequently - we'll set up your system to remember it. This way, you'll learn best practices for security while maintaining convenience.
 
 - What it does: Generates a new SSH key pair (public and private keys).
 - `-t ed25519`: Specifies the type of key to create. ED25519 is a modern, secure, and efficient algorithm.
-- `-C "your_email@example.com"`: Adds a comment to the key. The email is used as an identifier and can help manage multiple keys.
+- `-C "netid@nyu.edu"`: Adds a comment to the key. The email is used as an identifier and can help manage multiple keys.
 
 Platform notes:
 - Works on Windows (via Git Bash or WSL), Mac, and Linux.
@@ -56,6 +59,7 @@ Platform notes:
 #### Add the SSH key to your GitHub account
 
 - Go to GitHub Settings > SSH and GPG keys > New SSH key
+- Select a name for your key (it doesn't matter what this is, it's just for you to identify it later)
 - Paste your public key and save
 
 What it does: This step associates your local machine with your GitHub account, allowing secure, password-less interactions.
