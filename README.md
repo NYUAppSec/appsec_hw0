@@ -19,7 +19,7 @@ When creating your SSH key, we recommend using a passphrase for added security. 
 - `-C "netid@nyu.edu"`: Adds a comment to the key. The email is used as an identifier and can help manage multiple keys.
 
 Platform notes:
-- Works on Windows (via Git Bash or WSL), Mac, and Linux.
+- Works on Windows (via Git Bash or WSL as we have or will discuss in class), Mac, and Linux.
 - Windows users may need to install Git for Windows, which includes Git Bash.
 
 #### Add the SSH key to your SSH agent
