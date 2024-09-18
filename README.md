@@ -11,6 +11,7 @@ With this lab, we'll make sure you're set up with git and GitHub so that you can
 All of these things are essential for the work we'll be doing in this class. The good news is, even if you're not familiar with any of this just yet, it's not that tricky after you practice a few times.
 
 In this lab, we'll work through the flow below that takes a project from initialization through version 3.0 and then back to version 1.0. This lab should spell out how to do everything step by step.
+
 ![workflow](images/workflow.png)
 
 ## Setup
@@ -168,7 +169,9 @@ By setting up GPG signing, you're adding an extra layer of verification to your 
 
 ## Repository Cloning 
 Now that our setup is out of the way, cloning the repository will be a snap.Near the top of this repository, click the "<> Code" button and copy the SSH clone path. NOTE: This will be different for you than the image since you accepted this assignment via classrooms.
+
 ![clone_path](images/clone_path.png)
+
 ```bash
 git clone git@github.com:NYUAppSec/appsec_hw0.git # NOTE: Change this as instructed
 ```
