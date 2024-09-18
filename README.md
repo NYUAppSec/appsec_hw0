@@ -166,4 +166,96 @@ This ensures GPG can prompt for the passphrase when needed.
 
 By setting up GPG signing, you're adding an extra layer of verification to your commits, ensuring that your work is authenticated and tamper-evident.
 
-## 
+## Repository Cloning 
+Now that our setup is out of the way, cloning the repository will be a snap.Near the top of this repository, click the "<> Code" button and copy the SSH clone path. NOTE: This will be different for you than the image since you accepted this assignment via classrooms.
+![clone_path](images/clone_path.png)
+```bash
+git clone git@github.com:NYUAppSec/appsec_hw0.git # NOTE: Change this as instructed
+```
+## Looking Arround
+Now that your repository is clone, let's take a look around. Start by entering your repository.
+```bash
+cd appsec_hw0/
+ls # shows README.md
+```
+Not a lot to see here just yet, but we'll fix that. Let's see what branch we're on.
+```bash
+git branch # shows * main
+```
+So we're on the main branch. Before we start changing things, let's create a branch to work from so that we can always come back to this clean state if we need to.
+
+## Create and Develop feature/v1
+
+```bash
+git checkout -b feature/v1
+echo "version 0.2" > version.txt
+git add version.txt
+git commit -m "Update version to 0.2"
+echo "version 0.3" > version.txt
+git commit -am "Update version to 0.3"
+```
+
+## Merge feature/v1 and Create Tag 1.0
+
+```bash
+git checkout main
+git merge feature/v1
+echo "version 1.0" > version.txt
+git commit -am "Update version to 1.0"
+git tag -a v1.0 -m "Release version 1.0"
+```
+
+## Create and Develop feature/v2
+
+```bash
+git checkout -b feature/v2
+echo "version 1.1" > version.txt
+git commit -am "Update version to 1.1"
+echo "version 1.2" > version.txt
+git commit -am "Update version to 1.2"
+```
+
+## Merge feature/v2 and Create Tag 2.0
+
+```bash
+git checkout main
+git merge feature/v2
+echo "version 2.0" > version.txt
+git commit -am "Update version to 2.0"
+git tag -a v2.0 -m "Release version 2.0"
+```
+
+## Continue Development on main and Create Tag 3.0
+
+```bash
+echo "version 3.0" > version.txt
+git commit -am "Update version to 3.0"
+git tag -a v3.0 -m "Release version 3.0"
+```
+
+## 7. Demonstrate Rolling Back to v1.0
+
+To view the state of the project at v1.0:
+```bash
+git checkout v1.0
+cat version.txt  # This will show "version 1.0"
+```
+
+To return to the latest state:
+```bash
+git checkout main
+cat version.txt  # This will show "version 3.0"
+```
+
+## Additional Notes
+
+- The `checkout` command is used to switch between branches and tags.
+- The `-b` flag with `checkout` creates a new branch.
+- The `-a` flag with `tag` creates an annotated tag, which includes additional metadata.
+- Always ensure you're on the correct branch before making changes or merging.
+- Use `git status` frequently to check your current branch and state.
+- Use `git log --oneline --decorate --graph --all` to visualize your branch structure.
+
+This branching model demonstrates a typical feature branch development process, where features are developed in isolation and then merged into the main branch for releases. The version.txt file helps to clearly illustrate the version progression throughout the development process.
+
+
