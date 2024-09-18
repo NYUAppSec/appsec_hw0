@@ -175,8 +175,18 @@ Now that our setup is out of the way, cloning the repository will be a snap.Near
 ```bash
 git clone git@github.com:NYUAppSec/appsec_hw0.git # NOTE: Change this as instructed
 ```
+
+![init](images/git_demo_init.png)
+
+If we were starting a new repository without cloning it from GitHub, we could have done the following:
+```bash
+mkdir appsec_hw0
+cd appsec_hw0
+git init
+```
+
 ## Looking Arround
-Now that your repository is clone, let's take a look around. Start by entering your repository.
+Now that your repository is cloned, let's take a look around. Start by entering your repository.
 ```bash
 cd appsec_hw0/
 ls # shows README.md
@@ -185,6 +195,7 @@ Not a lot to see here just yet, but we'll fix that. Let's see what branch we're 
 ```bash
 git branch # shows * main
 ```
+
 So we're on the main branch. Before we start changing things, let's create a branch to work from so that we can always come back to this clean state if we need to.
 
 ## Create and Develop feature/v1
@@ -192,11 +203,13 @@ So we're on the main branch. Before we start changing things, let's create a bra
 ```bash
 git checkout -b feature/v1
 echo "version 0.2" > version.txt
-git add version.txt
-git commit -m "Update version to 0.2"
+git add version.txt # could also be: git add .
+git commit -m "update version to 0.2"
 echo "version 0.3" > version.txt
-git commit -am "Update version to 0.3"
+git commit -am "update version to 0.3"
 ```
+
+![v1](images/git_demo_v1.png)
 
 ## Merge feature/v1 and Create Tag 1.0
 
@@ -204,19 +217,23 @@ git commit -am "Update version to 0.3"
 git checkout main
 git merge feature/v1
 echo "version 1.0" > version.txt
-git commit -am "Update version to 1.0"
+git commit -am "update version to 1.0"
 git tag -a v1.0 -m "Release version 1.0"
 ```
+
+![f1](images/git_demo_f1-2.png)
 
 ## Create and Develop feature/v2
 
 ```bash
 git checkout -b feature/v2
 echo "version 1.1" > version.txt
-git commit -am "Update version to 1.1"
+git commit -am "update version to 1.1"
 echo "version 1.2" > version.txt
-git commit -am "Update version to 1.2"
+git commit -am "update version to 1.2"
 ```
+
+![f2](images/git_demo_f2-2.png)
 
 ## Merge feature/v2 and Create Tag 2.0
 
@@ -224,25 +241,31 @@ git commit -am "Update version to 1.2"
 git checkout main
 git merge feature/v2
 echo "version 2.0" > version.txt
-git commit -am "Update version to 2.0"
+git commit -am "update version to 2.0"
 git tag -a v2.0 -m "Release version 2.0"
 ```
+
+![v2](images/git_demo_v2.png)
 
 ## Continue Development on main and Create Tag 3.0
 
 ```bash
 echo "version 3.0" > version.txt
-git commit -am "Update version to 3.0"
+git commit -am "update version to 3.0"
 git tag -a v3.0 -m "Release version 3.0"
 ```
 
-## 7. Demonstrate Rolling Back to v1.0
+![v3](images/git_demo_v3.png)
+
+## Demonstrate Rolling Back to v1.0
 
 To view the state of the project at v1.0:
 ```bash
 git checkout v1.0
 cat version.txt  # This will show "version 1.0"
 ```
+
+![workflow](images/workflow.png)
 
 To return to the latest state:
 ```bash
