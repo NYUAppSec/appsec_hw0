@@ -176,14 +176,21 @@ Now that our setup is out of the way, cloning the repository will be a snap.Near
 git clone git@github.com:NYUAppSec/appsec_hw0.git # NOTE: Change this as instructed
 ```
 
-![init](images/git_demo_init.png)
-
-If we were starting a new repository without cloning it from GitHub, we could have done the following:
+We won't use the commands below for this lab, but if we were starting a new repository without cloning it from GitHub, we would have done the following:
 ```bash
 mkdir appsec_hw0
 cd appsec_hw0
 git init
 ```
+
+- What it does:
+  - Initializes a new Git repository in the current directory
+  - Creates a hidden .git subdirectory in the current folder
+  - Sets up the necessary structure for Git to start tracking changes
+  - Prepares the directory to use Git commands for version control
+  - Does not create any commits or track any files automatically
+
+![init](images/git_demo_init.png)
 
 ## Looking Arround
 Now that your repository is cloned, let's take a look around. Start by entering your repository.
@@ -195,31 +202,91 @@ Not a lot to see here just yet, but we'll fix that. Let's see what branch we're 
 ```bash
 git branch # shows * main
 ```
+- What it does: Lists all local branches in the current repository.
+  - The current branch is indicated with an asterisk (*)
+  - In this case, it shows we're on the 'main' branch
 
 So we're on the main branch. Before we start changing things, let's create a branch to work from so that we can always come back to this clean state if we need to.
 
 ## Create and Develop feature/v1
+Now that we have our repository set up, we'll create a new branch to start working on our version 1 release. Well need to make a few updates along the way, but once we're done and feel good about our changes, we'll merge the changes back into the main branch. Let's start by creating and checking out a new branch. We can accomplish both steps with one simple command:
 
 ```bash
 git checkout -b feature/v1
+```
+- What it does: Creates a new branch named 'feature/v1' and immediately switches to it.
+  - The `checkout` command is used to switch between branches and tags
+  - Combines two operations: branch creation and switching
+  - The new branch is based on the current HEAD (usually the latest commit of the current branch)
+
+
+Let's put the text "version 0.2" into a file called `version.txt`. We can do this with the simple commandline prompt below.
+```bash
 echo "version 0.2" > version.txt
-git add version.txt # could also be: git add .
-git commit -m "update version to 0.2"
-echo "version 0.3" > version.txt
-git commit -am "update version to 0.3"
 ```
 
+Now that we have a file with a version in it, let's save our progress. We'll create a commit "snapshot" that we can go back to at any time. We'll start by staging our changes.
+```bash
+git add version.txt # could also be: git add .
+```
+
+- What it does: Adds the specified file(s) to the staging area (index) in preparation for the next commit.
+  - `git add version.txt`: Stages the specific file named `version.txt`
+  - `git add .`: Stages all new and modified files in the current directory and its subdirectories
+
+Now that our new `version.txt` is staged for tracking, let's commit the change we made. 
+```bash
+git commit -m "update version to 0.2"
+```
+
+- What it does:
+  - `git commit`: base command to create a new commit
+  - `-m` : flag that allows you to specify the commit message directly in the command line
+  - The quoted text is the message associated with the commit which can help you and other developers identify the changes that took place for this snapshot
+
+Now that we've made a snapshot of the change, let's update the version again.
+```bash
+echo "version 0.3" > version.txt
+```
+It's been a long day, and it's time for a coffee break, let's go ahead and commit this change.
+```bash
+git commit -am "update version to 0.3"
+```
+- What it does: 
+  - We've already seen `git commit`, but what's this new `-am` flag?
+  - The `-a` flag (part of `-am`) stages all modifications to tracked files automatically
+  - This eliminates the need for a separate `git add` command for already-tracked files
+  - The `-m` flag, as before, allows specifying the commit message inline
+  - Combines the git add and git commit steps for modified (but not new) files
+  - We could have also split out the flags and written this as `git commit -a -m "update version to 0.3"`
+ 
 ![f1](images/git_demo_f1-2.png)
 
 ## Merge feature/v1 and Create Tag 1.0
 
 ```bash
 git checkout main
+```
+- What it does: Switches the current working branch to the main branch.
+```bash
 git merge feature/v1
+```
+- What it does: Merges the changes from the feature/v1 branch into the current branch (main).
+
+Now that the first feature is complete, let's update the version again to say 1.0 and commit the changes.
+```bash
 echo "version 1.0" > version.txt
 git commit -am "update version to 1.0"
+```
+Good, we're building muscle memory around commits. 
+
+Now let's add a release tag, so that we can easily come back to this if we need to (and I think we will later).
+```bash
 git tag -a v1.0 -m "Release version 1.0"
 ```
+- What it does: Creates an annotated tag named v1.0 at the current commit, with the message "Release version 1.0".
+  - Note that the `-a` here is different than before where it replaced `add` here it means "annotate" and takes a string directly after
+  - `-m` is still a message
 
 ![v1](images/git_demo_v1.png)
 
@@ -255,14 +322,19 @@ git commit -am "update version to 3.0"
 git tag -a v3.0 -m "Release version 3.0"
 ```
 
+Let's look at `version.txt` to make sure everything looks right.
+```bash
+cat version.txt # shows "version 3.0"
+```
+
 ![v3](images/git_demo_v3.png)
 
 ## Demonstrate Rolling Back to v1.0
 
-To view the state of the project at v1.0:
+To view the state of the project at v1.0 we can simply checkout the commit by its tag annotation:
 ```bash
 git checkout v1.0
-cat version.txt  # This will show "version 1.0"
+cat version.txt  # shows "version 1.0"
 ```
 
 ![workflow](images/workflow.png)
@@ -273,15 +345,19 @@ git checkout main
 cat version.txt  # This will show "version 3.0"
 ```
 
-## Additional Notes
+If we didn't have a tag on a commit that we want to go back to, that's no problem, we can just look at our commit logs with `git log`.
+```bash
+git log
+```
 
-- The `checkout` command is used to switch between branches and tags.
-- The `-b` flag with `checkout` creates a new branch.
-- The `-a` flag with `tag` creates an annotated tag, which includes additional metadata.
+This is where those commit messages really come in handy.
+
+## Additional Notes
 - Always ensure you're on the correct branch before making changes or merging.
 - Use `git status` frequently to check your current branch and state.
 - Use `git log --oneline --decorate --graph --all` to visualize your branch structure.
 
+## Conclusion
 This branching model demonstrates a typical feature branch development process, where features are developed in isolation and then merged into the main branch for releases. The version.txt file helps to clearly illustrate the version progression throughout the development process.
 
 
