@@ -1,7 +1,20 @@
 # Homework 0: Getting Good with Git
 A starter assignment to ensure things are set up and working properly with Github.
 
+## Overview
+With this lab, we'll make sure you're set up with git and GitHub so that you can:
+- push to and pull from GitHub without entering a password
+- clone a repository
+- automatically sign your commits
+- navigate github branches with ease
+- roll back to previous commits as needed
+All of these things are essential for the work we'll be doing in this class. The good news is, even if you're not familiar with any of this just yet, it's not that tricky after you practice a few times.
+
+In this lab, we'll work through the flow below that takes a project from initialization through version 3.0 and then back to version 1.0. This lab should spell out how to do everything step by step.
+![workflow](images/workflow.png)
+
 ## Setup
+Before we get started with the assignment, we just need to get some housekeeping out of the way. If you already have your SSH and GPG keys set up and integrated with git and GitHub, you can skip this section. For those that don't, please invest the time getting this set up now. It will pay dividends down the road.
 
 ### SSH Key Setup Guide
 
@@ -152,3 +165,5 @@ This ensures GPG can prompt for the passphrase when needed.
 - Some IDEs and Git clients have built-in support for GPG signing. Check your tool's documentation for integration details.
 
 By setting up GPG signing, you're adding an extra layer of verification to your commits, ensuring that your work is authenticated and tamper-evident.
+
+## 
