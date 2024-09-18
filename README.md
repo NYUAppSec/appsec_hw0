@@ -209,7 +209,7 @@ echo "version 0.3" > version.txt
 git commit -am "update version to 0.3"
 ```
 
-![v1](images/git_demo_v1.png)
+![f1](images/git_demo_f1-2.png)
 
 ## Merge feature/v1 and Create Tag 1.0
 
@@ -221,7 +221,7 @@ git commit -am "update version to 1.0"
 git tag -a v1.0 -m "Release version 1.0"
 ```
 
-![f1](images/git_demo_f1-2.png)
+![v1](images/git_demo_v1.png)
 
 ## Create and Develop feature/v2
 
